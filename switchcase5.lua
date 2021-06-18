@@ -5,7 +5,7 @@ local switch =
     {},
     {
 		__call = 	function(t, k)
-						print('__call')
+						
 						case = setmetatable({}, {__call = function(t,k) return t[k] end,
 						__index = 	
 						function(t,data) 
