@@ -23,7 +23,6 @@ local switch =
 						return t[k]
 					end,
         __index = 	function(t,data)
-					-- data = switch(here)
 						return setmetatable({},{__call =	function(t, ...)
 										
 									end
