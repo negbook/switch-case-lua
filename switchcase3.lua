@@ -2,27 +2,21 @@ switch =
     setmetatable(
     {},
     {
-		__call = function(t, k)
+		__call = 	function(t, k)
 						return t[k]
-				end,
-        __index = function(t,data)
-			return setmetatable(
-			{},
-			{
-				__call = function(t, cb)
-						return cb(setmetatable(
-                {},
-                {__newindex = function(t, k, v) 
-                        if data == k then
-                            v()
-                        end
-                end}
-            ))
-						
-				end
+					end,
+        __index = 	function(t,data)
+						return setmetatable({},{__call =	function(t, cb)
+																return cb(setmetatable({},{__newindex = function(t, k, v) 
+																											if data == k then
+																												v()
+																											end
+																										end}
+															))
+															end
 									
-			})
-		end
+								})
+					end
 		
     }
 )
