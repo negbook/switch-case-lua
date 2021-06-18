@@ -12,19 +12,15 @@ local switch =
                         return t[k]
                     end,
                     __index = function(t, data)
-                        if data == k then
-                            return setmetatable(
+                        return data and data == k and setmetatable(
                                 {},
                                 {
                                     __call = function(t, fn)
                                         fn()
                                     end
                                 }
-                            )
-                        else
-                            return (function()
+                            ) or (function()
                             end)
-                        end
                     end
                 }
             )
@@ -35,6 +31,7 @@ local switch =
                 {},
                 {
                     __call = function(t, ...)
+					
                     end
                 }
             )
@@ -43,15 +40,20 @@ local switch =
 )
 
 local a = 4
+local b = "some"
 switch(a)(
-    case(1)(
-        function()
+    case(1)(function()
             print(99)
-        end
-    ),
-    case(4)(
-        function()
+    end),
+    case(4)(function()
             print(98)
-        end
-    )
+    end)
+)
+switch(b)(
+    case("some")(function()
+            print(99)
+    end),
+    case("where")(function()
+            print(98)
+    end)
 )
